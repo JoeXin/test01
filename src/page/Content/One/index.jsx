@@ -51,11 +51,18 @@ const Header = () => {
 
 const UserCard = () => (
   <div className='user-card'>
-    <img src="https://web.xibaoxiao.com/Attachments/baoxiao/28/2020/11/26/287f25a29-4eed-4da2-8857-621294f187a0.jpg" alt="" style={{"maxHeight":"100%"  }} />
+    <img src="https://web.xibaoxiao.com/Attachments/baoxiao/28/2020/11/26/287f25a29-4eed-4da2-8857-621294f187a0.jpg" alt="" style={{ "maxHeight": "100%" }} />
     <h2>test</h2>
   </div>
 )
 
+const Footer = () => (
+  <footer>
+    <div className='footer-wrapper'>
+      <p>Copyright 2020</p>
+    </div>
+  </footer>
+)
 
 class One extends Component {
   constructor(props) {
@@ -86,6 +93,7 @@ class One extends Component {
           <Numbers numbers={this.state.numbers} />
           <button>第二章</button>
         </ul>
+        <Footer/>
       </div>
     )
   }
