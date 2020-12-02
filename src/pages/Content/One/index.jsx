@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import './index.less'
-import style from './index.less'
-
+ 
 const getUserInfo = (firstName, lastName, country, title, skills) => {
   return `${firstName}${lastName} ,a ${title} develop based in ${country}. he knows ${skills.map((i, k) => i)} `
 }
 const skills = ['HTML', 'CSS', 'JavaScript']
-console.log(getUserInfo('qiao', 'xin', 'China', 'front', skills))
+//console.log(getUserInfo('qiao', 'xin', 'China', 'front', skills))
 
 const Numbers = ({ numbers }) => {
   const list = numbers.map((number) => <li>{number}</li>)
@@ -22,6 +21,7 @@ const Skills = [
   ['JavaScript', 10],
   ['React', 10]
 ]
+
 const Header = () => {
   return (
     <header style={{ 'width': 'auto', 'height': 'auto', 'border': "1px solid red" }}>
@@ -64,6 +64,14 @@ const Footer = () => (
   </footer>
 )
 
+const buttonStyles = {
+  padding: '10px 20px',
+  background: 'rgb(0, 255, 0',
+  border: 'none',
+  borderRadius: 5,
+}
+const Button = () => <button style={buttonStyles}> action </button>
+
 class One extends Component {
   constructor(props) {
     super(props)
@@ -84,6 +92,9 @@ class One extends Component {
         console.log('error');
       });
   }
+  btnJumpBtn=()=>{
+    this.props.history.push('/two')
+  }
   render() {
     return (
       <div className="test">
@@ -91,7 +102,9 @@ class One extends Component {
         <UserCard ></UserCard >
         <ul>
           <Numbers numbers={this.state.numbers} />
-          <button>第二章</button>
+          <button onClick={this.btnJumpBtn.bind(this)}>第二章</button>
+          ssss
+          <Button > </Button>
         </ul>
         <Footer/>
       </div>
