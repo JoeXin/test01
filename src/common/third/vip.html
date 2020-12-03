@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VIP解析</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="../img/logoimg.jpeg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="MobileOptimized" content="width" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="description" content="VIP解析">
+    <meta name="keywords" content="VIP解析">
+    <meta name="apple-mobile-web-app-title" content="VIP解析">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            border: none;
+        }
+
+        .content {
+            margin: 0 3% 30px 3%;
+        }
+
+        .title {
+            margin-top: 100px;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .searchapi {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .videourl {
+            flex: 1;
+        }
+
+        #url {
+            width: 100%;
+            height: 32px;
+            border: 1px solid #ddd;
+        }
+
+        .api {
+            /* margin-left: 10px; */
+            margin: 0 2px 0 2px;
+
+        }
+
+        .play {
+            cursor: pointer;
+            color: black;
+            background-color: white;
+        }
+
+        iframe {
+            width: 100%;
+            background: skyblue;
+            height: calc(100vh - 145px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content">
+        <div class="title">
+            VIP视频解析
+        </div>
+        <div class="searchapi">
+
+            <div class="videourl">
+                <input type="text" id='url' placeholder="请输入需要解析的地址">
+            </div>
+            <div class="api">
+                <select name="apiname" id="apiid">
+
+                </select>
+            </div>
+            <div class="button">
+                <button type="submit" class="play">播放解析</button>
+            </div>
+        </div>
+
+
+        <iframe src="" frameborder="0" id="iframe"></iframe>
+    </div>
+
+</body>
+<script src="../js/jquery.3.5.1.js"></script>
+<script>
+
+    let vipsource = [
+        { id: 1, name: '通用vip接口① ', url: 'http://yun.baiyug.cn/vip/?url=' },
+        { id: 2, name: '通用vip接口② ', url: 'https://jx.biaoge.tv/index.php?url=' },
+        { id: 3, name: '通用vip接口③ ', url: 'http://www.1717yun.com/jx/ty.php?url=' },
+        { id: 4, name: '腾讯 && 爱奇艺 && 优酷', url: 'http://jx.vgoodapi.com/jx.php?url=' },
+        { id: 5, name: '腾讯接口①', url: 'http://jx.api.163ren.com/vod.php?url=' },
+        { id: 7, name: '优酷接口① ', url: 'http://www.qxyingyuan.vip/play?make=url&amp;id=' },
+        { id: 8, name: '优酷接口② ', url: 'http://le.206dy.com/vip.php?url=' },
+        { id: 9, name: '1905优先', url: 'http://api.xfsub.com/index.php?url=' },
+        { id: 10, name: '综合线路1', url: 'http://jx.598110.com/index.php?url=' },
+        { id: 11, name: '综合线路2', url: 'http://jx.598110.com/duo/index.php?url=' },
+        { id: 12, name: '综合线路3', url: 'http://jx.598110.com/zuida.php?url=' },
+        { id: 13, name: '综合线路4', url: 'http://api.baiyug.cn/vip/index.php?url=' },
+        { id: 14, name: '综合线路5', url: 'https://jiexi.071811.cc/jx.php?url=' },
+        { id: 15, name: '综合线路6', url: 'http://www.sfsft.com/admin.php?url=' },
+        { id: 17, name: '综合线路8', url: 'http://q.z.vip.totv.72du.com/?url=' },
+        { id: 18, name: '其他1', url: 'http://q.z.vip.totv.72du.com/?url=' },
+        { id: 19, name: '其他2', url: 'http://aikan-tv.com/?url=' },
+        { id: 21, name: '其他4', url: 'http://www.wmxz.wang/video.php?url=' },
+        { id: 22, name: '其他5', url: 'http://jx.cesms.cn/?url=' },
+        { id: 23, name: '其他6', url: 'http://www.q2017.com/vip/?url=' },
+        { id: 24, name: '其他7', url: 'http://jx.zzit.cc/tv.php?url=' },
+        { id: 25, name: '其他8', url: 'http://tv.wandhi.com/api?url=' }
+    ]
+
+    var option = '';
+    for (var i = 0; i < vipsource.length; i++) {
+        option += "<option value='" + vipsource[i].url + "'  >" + vipsource[i].name + "</option>";
+    }
+
+    $("#apiid").append(option);
+
+
+    function start() {
+        $('#iframe').attr('src', $('#apiid').val() + $('#url').val())
+    }
+
+    $('.play').click(function () {
+        start()
+    })
+
+    $('#url').on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            start()
+        }
+    })
+
+
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1da4d2276614a23dc272f59130a432c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</html>
