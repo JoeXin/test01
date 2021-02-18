@@ -24,7 +24,7 @@ const Skills = [
 
 const Header = () => {
   return (
-    <header style={{ 'width': 'auto', 'height': 'auto', 'border': "1px solid red" }}>
+    <header style={{ 'width': 'auto', 'height': 'auto', 'border': "1px solid green" }}>
       <div className='header-wrapper'>
         <h1>Welcome to 30 Days Of React</h1>
         <h2>Getting Started React</h2>
