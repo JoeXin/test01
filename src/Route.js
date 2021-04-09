@@ -28,8 +28,8 @@ class Routes extends Component {
                </Route>   */}
                <Route path="/tab"   component={Tab} />
                <Route path="/apple"   component={Apple} />
-               <Route path="/"   component={App} />
-               <Route path="/one" exact component={One} />
+               <Route path="/"  exact component={App} />
+               <Route path="/one"  component={One} />
                <Route path="/two"   component={Two} />
             </Switch>
          </Router>

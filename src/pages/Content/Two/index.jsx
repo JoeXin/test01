@@ -76,7 +76,7 @@ const Two = () => {
         ref.current.style.textAlign = 'center'
     }
     return (
-        <div className="test">
+        <div className="two test">
             <div  >
                 <h1>30 Days Of React</h1>
                 <div className='animal'>

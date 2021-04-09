@@ -1,43 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+
+<head>
+  <!-- 网站编码格式 -->
+  <meta charset="utf-8" />
+  <!-- 页签图标 -->
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon" />
+
+  <!-- 页面缩放                           设备宽度     设置页面的初始缩放值 允许用户的最大缩放值 是否允许用户进行缩放 -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,viewport-fit=cover">
+
+  <!-- 删除默认的苹果工具栏和菜单栏 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- 苹果工具栏颜色-->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!--用来检测html里的一些格式 [telephone]主要作用是是否设置自动将你的数字转化为拨号连接  [email]是否告诉设备识别邮箱，点击之后自动发送 [adress]点击地址是否直接跳转至地图的功能-->
+  <meta name="format-detection" content="telephone=no">
+
+  <!--uc浏览器判断到页面上文字居多时，会自动放大字体优化移动用户体验  强制重置这个用户体验-->
+  <meta name="wap-font-scale" content="no">
+
+  <!--强制页面在当前窗口中以独立页面显示，可以防止自己的网页被别人当作一个frame页调用-->
+  <meta http-equiv="Window-target" content="_top">
+
+  <!--指定双核浏览器默认以何种方式渲染页面 [webkit]极速核 [ie-comp]ie兼容内核 [ie-stand]ie标准内核-->
+  <meta name="renderer" content="webkit">
+
+  <!--X-UA-Compatible 指定网页的兼容性模式设置IE8以下不识别 以IE的最高版本来展示 chrome=1 如果有Chrome的话优先展示chrome 360-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+  <!--指定是否显示图片工具栏，当为false代表不显示，当为true代表显示。-->
+  <meta http-equiv="imagetoolbar" content="false" />
+
+  <!--神马搜索引擎的禁止转码方式-->
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <!--百度搜索的禁止转码方式 -->
+  <meta http-equiv="Cache-Control" content="no-transform">
+
+  <!-- 微软的老式浏览器 -->
+  <meta name="MobileOptimized" content="width">
+
+  <!--针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓-->
+  <meta name="HandheldFriendly" content="true">
+
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  <title>React App</title>
+</head>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+</body>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
 </html>
