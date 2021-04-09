@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>备忘录</title>
+</head>
+<style>
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+	}
+
+	.memorandum {
+		display: flex;
+		align-items: center;
+		margin-top: 20px;
+		padding-right: 10px;
+		padding-left: 10px;
+	}
+
+	.memorandum form {
+		width: 100%;
+	}
+
+	.memorandum input,
+	.memorandum textarea {
+		box-sizing: border-box;
+		padding-left: 3%;
+		width: 100%;
+		border: 1px solid #ccc;
+		outline: none;
+	}
+
+	.memorandum label {
+		color: #2296e8;
+		display: block;
+		padding-bottom: 10px;
+	}
+
+	input {
+		border-radius: 6px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	textarea {
+		resize: none;
+		border-radius: 11px;
+		padding-top: 2%;
+		padding-bottom: 2%;
+	}
+
+	form div:first-child {
+		margin-bottom: 20px;
+	}
+
+	form div:first-child,
+	form div:last-child {
+		text-align: center;
+	}
+
+	form div:last-child button {
+		background: #2296e8;
+		border: none;
+		cursor: pointer;
+		border-radius: 14px;
+		padding: 10px 25px;
+	}
+</style>
+
+<body>
+	<div class="memorandum">
+		<form action="" method="POST">
+			<div>备忘录</div>
+			<div>
+				<label for="title">标题</label>
+				<input type="text" name="title" id='inputtitle' placeholder="请输入标题">
+			</div>
+			<div>
+				<label for="content">内容</label>
+				<textarea name="remark" id="" cols="30" rows="10" placeholder="请输入内容"></textarea>
+			</div>
+			<div>
+				<button type="submit">提交</button>
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>
