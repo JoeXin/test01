@@ -25,5 +25,5 @@ const mapStateToProps = (state) => ({
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Apple)
+// export default connect(mapStateToProps)(Apple)
 export default connect(mapStateToProps)(Apple)
-
