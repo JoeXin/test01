@@ -1,9 +1,10 @@
 
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
+import { Form, Input, Button, Checkbox } from 'antd';
 
 import './index.less';
-import http from '../../common/utils/http'
+import http from '@/common/utils/http'
 
 function Login() {
 	let history = useHistory();
@@ -12,7 +13,7 @@ function Login() {
 
 	const loginBind = (e) => {
 		e.preventDefault()
- 		http.PostUrl('users/login', {
+		http.PostUrl('users/login', {
 			userName: loginstate.userName,
 			passWord: loginstate.passWord
 		}).then((data) => {
@@ -38,34 +39,40 @@ function Login() {
 		})
 	}
 
+ 
+
 	return (
 		<div className="App">
 			<div className="Content">
-				<form className="login-form" name="login" >
-					<div className="login-content">
-						<div>
-							<input type="text" autoComplete="off"
-								placeholder="用户名" name="userName" required value={loginstate.userName || ''} onChange={userChange} />
-						</div>
-						<div style={{ marginTop: '16px' }}>
-							<input type="password"
-								autoComplete="off" placeholder="登录密码" name="passWord" value={loginstate.passWord || ''} onChange={passwordChange} required maxLength="32" />
-						</div>
-					</div>
-					<div style={{ textAlign: "center" }}>
-						<button className="login-btn"
-							onClick={loginBind}
-						>
-							22
-						</button>
-						{/* <input type="submit" className="login-btn"
-							onClick={loginBind} value="登录" /> */}
-					</div>
-					<div className="foor">
-						<div className="left"><span>忘记密码 ?</span></div>
-						<div className="right"><span>注册账户</span></div>
-					</div>
-				</form>
+			 
+				<Form
+ 					className='LoginForm'
+					name="loginContent"
+					initialValues={{ remember: true }}
+				>
+					<Form.Item
+						label="账号"
+						name="userName"
+						rules={[{   message: '请输入账号!' }]}
+					>
+						<Input onChange={userChange} />
+					</Form.Item>
+
+					<Form.Item
+						label="密码"
+						name="passWord"
+						rules={[{   message: '请输入密码!' }]}
+					>
+						<Input.Password onChange={passwordChange} />
+					</Form.Item>
+
+				 
+					<Form.Item  >
+						<Button type="primary" onClick={loginBind} htmlType="submit">
+							登录
+        				</Button>
+					</Form.Item>
+				</Form>
 			</div>
 		</div>
 	);

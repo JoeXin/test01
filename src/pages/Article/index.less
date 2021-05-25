@@ -1,0 +1,51 @@
+.information-content {
+	margin-left: 0.2rem;
+
+	.information-item {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 0.01rem;
+
+		&:hover {
+			box-shadow: 0 0 7px 0 rgba(0, 0, 0, .15);
+			background: #fff;
+		}
+
+		.information-wrapper {
+			display: flex;
+
+			a>img {
+				width: 216px;
+				height: 144px;
+			}
+
+			.information-itemcontent {
+				.information-title {
+					font-size: 18px;
+				}
+
+				.information-other {
+					display: flex;
+					justify-content: space-between;
+				}
+			}
+
+		}
+
+		>div:nth-child(2) {
+			display: flex;
+			justify-content: space-around;
+
+			>div {
+				margin-right: .1rem;
+			}
+		}
+	}
+}
+
+.Btn {
+	background: #4285f4;
+	color: #fff;
+	border: none;
+	padding: .05rem .15rem;
+}

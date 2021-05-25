@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
  import Routes from './Route';
 // import reportWebVitals from './reportWebVitals';
+import 'antd/dist/antd.css';
+import './index.less';
 
 ReactDOM.render(
 	<React.StrictMode>

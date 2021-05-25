@@ -5,6 +5,9 @@ function PostUrl(url, data) {
 		body: JSON.stringify(data),
 		//body: data,
 		method: 'POST',
+		headers:{
+			'Content-Type': 'application/json',
+		},
 		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 		credentials: 'same-origin', // include, same-origin, *omit
 	}).then(response => response.json())

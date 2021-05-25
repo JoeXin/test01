@@ -1,4 +1,4 @@
-const {   Articles } = require('../schema/index')
+const { Articles } = require('../schema/index')
 
 const Result = require('../result/index')
 
@@ -111,7 +111,6 @@ router.post('/searchArticlesByTitle', (req, res, next) => {
 })
 
 router.post('/getArticlesByPages', (req, res, next) => {
-
 	var item = req.body;
 	Articles.countDocuments({}, (err, count) => {
 		Articles.find().sort({ _id: -1 }).skip((item.pageIndex - 1) * item.pageSize).limit(Number(item.pageSize)).exec(function (err, doc) {
@@ -122,7 +121,7 @@ router.post('/getArticlesByPages', (req, res, next) => {
 					result: {
 						data: doc,
 						count: count,
-						totalpages: Math.floor((count - 1) / item.pageSize + 1)
+						totalpages: Math.floor((count - 1) / (Number(item.pageSize) + 1))
 					}
 				}));
 				return
@@ -137,4 +136,7 @@ router.post('/getArticlesByPages', (req, res, next) => {
 	})
 
 })
+
+
+
 module.exports = router

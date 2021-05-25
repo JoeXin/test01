@@ -4,6 +4,7 @@ import Index from '@pages/Index';
 import Login from '@pages/Login';
 import Article from '@pages/Article';
 import DetailArticle from '@pages/Article/DetailArticle';
+import AddArticle from '@pages/Article/AddArticle';
 
 const Routes = () => (
 	<BrowserRouter>
@@ -14,6 +15,7 @@ const Routes = () => (
 			<Route exact path="/todolist" component={Todolist} />
 			<Route exact path="/article" component={Article} />
 			<Route exact path="/articledetail" component={DetailArticle} />
+			<Route exact path="/addarticle" component={AddArticle} />
 			<Redirect exact to="/" />
 		</Switch>
 	</BrowserRouter>

@@ -22,9 +22,9 @@ var UserSchema = mongoose.Schema({
 	userName: String,
 	passWord: String,
 	age: Number,
-	active:{
-		type:Number,
-		default:1
+	active: {
+		type: Number,
+		default: 1
 	}
 });
 
@@ -43,6 +43,10 @@ var CategoriesSchema = mongoose.Schema({
 	count: {
 		type: Number,
 		default: 0
+	},
+	active: {
+		type: Number,
+		default: 1
 	}
 });
 
@@ -50,25 +54,31 @@ var Category = mongoose.model('Category', CategoriesSchema, 'category');
 
 
 var ArticlesSchema = mongoose.Schema({
-	category: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'category'
+
+	title: {
+		type:String
 	},
-	title: String,
-	addTime: { type: Date, default: Date.now() },
 	description: {
 		type: String,
 		default: ''
-	},
-	views: {
-		type: Number,
-		default: 0
 	},
 	content: {
 		type: String,
 		default: ''
 	},
+	
+	addTime: { type: Date, default: Date.now },
 
+	views: {
+		type: Number,
+		default: 0
+	},
+	categoryname: {
+		type: String
+	},
+	categoryid: {
+		type: Number 
+	},
 	/**
 	 * 状态
 	 * 0上架、1下架、2草稿
@@ -77,26 +87,14 @@ var ArticlesSchema = mongoose.Schema({
 		type: Number,
 		default: 0
 	},
-	active:{
-		type:Number,
-		default:1
+
+	active: {
+		type: Number,
+		default: 1
 	}
 })
 
 var Articles = mongoose.model('Articles', ArticlesSchema, 'articles');
-
-// const authorSchema = mongoose.Schema({
-// 	name: String,
-// 	stories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'story' }]
-// });
-
-// const storySchema = mongoose.Schema({
-// 	author: { type: mongoose.Schema.Types.ObjectId, ref: 'author' },
-// 	title: String
-// });
-
-// const Story = mongoose.model('story', storySchema);
-// const Author = mongoose.model('author', authorSchema);
 
 module.exports = {
 	Product,
