@@ -16,6 +16,7 @@ const Routes = () => (
 			<Route exact path="/article" component={Article} />
 			<Route exact path="/articledetail" component={DetailArticle} />
 			<Route exact path="/addarticle" component={AddArticle} />
+			<Route exact path="/editarticle" component={AddArticle} />
 			<Redirect exact to="/" />
 		</Switch>
 	</BrowserRouter>

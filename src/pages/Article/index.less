@@ -5,8 +5,9 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 0.01rem;
-
+		margin-bottom: .05rem;
 		&:hover {
+			cursor: pointer;
 			box-shadow: 0 0 7px 0 rgba(0, 0, 0, .15);
 			background: #fff;
 		}
@@ -20,6 +21,11 @@
 			}
 
 			.information-itemcontent {
+				display: flex;
+				flex-direction: column;
+				align-self: center;
+				margin-left: .12rem;
+
 				.information-title {
 					font-size: 18px;
 				}
@@ -27,6 +33,7 @@
 				.information-other {
 					display: flex;
 					justify-content: space-between;
+					margin-top: .15rem;
 				}
 			}
 
@@ -35,6 +42,7 @@
 		>div:nth-child(2) {
 			display: flex;
 			justify-content: space-around;
+			align-items: center;
 
 			>div {
 				margin-right: .1rem;

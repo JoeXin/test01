@@ -82,7 +82,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "startserver": "nodemon ./server/index.js"
+    "server": "nodemon ./server/index.js"
   },
   "eslintConfig": {
     "extends": [

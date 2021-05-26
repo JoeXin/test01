@@ -1,6 +1,8 @@
 
 const mongoose = require('mongoose');
 
+const bcryptjs = require('bcryptjs');
+
 // Schema定义数据的数据结构
 var ProductSchema = mongoose.Schema({
 	id: {
@@ -20,7 +22,12 @@ var UserSchema = mongoose.Schema({
 		default: ''
 	},
 	userName: String,
-	passWord: String,
+	passWord: {
+		type:String,
+		set(val){
+            return bcryptjs.hashSync(val)
+        }
+	},
 	age: Number,
 	active: {
 		type: Number,
@@ -73,11 +80,14 @@ var ArticlesSchema = mongoose.Schema({
 		type: Number,
 		default: 0
 	},
+	articlepic:{
+		type:String
+	},
 	categoryname: {
 		type: String
 	},
 	categoryid: {
-		type: Number 
+		type: String 
 	},
 	/**
 	 * 状态

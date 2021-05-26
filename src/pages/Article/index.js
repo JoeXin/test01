@@ -37,19 +37,24 @@ function Article() {
 	const addAritcleItem = () => {
 		history.push({ pathname: '/addarticle' })
 	}
-	function renderTime(date) {
+
+	const editAritcleItem=(item)=>{
+		history.push({ pathname: '/editarticle', state: item })
+	}
+
+	const renderTime = (date) => {
 		var dateee = new Date(date).toJSON();
-		return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '') 
-	  }
+		return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+	}
 	return (
 		<div>
-			<div>Article</div>
+			<div>文章列表</div>
 			<div className='information-content'>
 				{articleData.map((item, key) => (
-					<a className='information-item' key={key}>
+					<div className='information-item' key={key}>
 						<div className='information-wrapper'>
 							<a>
-								<img src={'https://img.36krcdn.com/20210525/v2_680011278a04459a91c55ba9af3df9d7_img_png'} alt="" />
+								<img src={item.articlepic} alt="" />
 							</a>
 							<div className='information-itemcontent'>
 								<div className='information-title'> {item.title}</div>
@@ -70,11 +75,11 @@ function Article() {
 							<div style={{ cursor: 'pointer' }} onClick={() => viewArticleItem(item)}>
 								查看
 							</div>
-							<div style={{ cursor: 'pointer' }} onClick={() => addAritcleItem(item)}>
+							<div style={{ cursor: 'pointer' }} onClick={() => editAritcleItem(item)}>
 								编辑
 						</div>
 						</div>
-					</a>
+					</div>
 				))}
 			</div>
 			<div style={{ marginTop: '10px' }}>

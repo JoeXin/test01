@@ -1,43 +1,83 @@
 
 import React, { useEffect, useState } from 'react'
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, Upload ,message} from 'antd';
+import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 
 import http from '@/common/utils/http'
+
+import './index.less'
 import { useHistory } from "react-router-dom";
 const { TextArea } = Input;
 const { Option } = Select;
 
-function AddArticle() {
+function AddArticle(props) {
+
+	const [form] = Form.useForm();
 	const [articleinfo, setArticleinfo] = useState({})
+	const [fileList, setFileList] = useState([])
 
-	let categorylist = [
-		{
-			title: '爱范儿',
-			id: 1
-		}, {
-			title: '有牛财经',
-			id: 2
-		}, {
-			title: '互联网那些事',
-			id: 3
+	const [categorylist, setCategorylist] = useState([])
+
+
+	setTimeout(() => {
+		if (props.location.state) {
+			setArticleinfo(props.location.state)
+			form.setFieldsValue({
+				title: articleinfo.title,
+				description: articleinfo.description,
+				content: articleinfo.content,
+				categoryid: articleinfo.categoryid,
+				categoryname: articleinfo.categoryname,
+				articlepic: '',
+				category: articleinfo.categoryname
+			})
 		}
-	];
+	})
 
-	const AddBind = (e) => {
-		console.log(articleinfo)
-		http.PostUrl('posts/addArticles', {
-			title: articleinfo.title,
-			description: articleinfo.description,
-			content: articleinfo.content,
-			categoryid: articleinfo.categoryid,
-			categoryname: articleinfo.categoryname,
-		}).then((data) => {
-			if (data.success) {
-			} else {
-				console.log(data.msg)
+
+
+	useEffect(() => {
+		getCategoryList()
+	}, [])
+
+	const getCategoryList = () => {
+		http.PostUrl('posts/getCategory').then((res) => {
+			if (res.success) {
+				let result = res.result;
+				setCategorylist(result)
 			}
 		})
 	}
+
+	const AddBind = (e) => {
+		form.validateFields().then((error, values) => {
+			let flag = false
+			for (let i in error) {
+				if (!error[i]) {
+					flag = true;
+					message.warning(`请填写${i}`)
+					return
+				}
+			}
+			if (!flag) {
+				http.PostUrl('posts/addArticles', {
+					title: articleinfo.title,
+					description: articleinfo.description,
+					content: articleinfo.content,
+					categoryid: articleinfo.categoryid,
+					categoryname: articleinfo.categoryname,
+					// articlepic:fileList?.fileList[0].thumbUrl
+				}).then((data) => {
+					if (data.success) {
+					} else {
+						console.log(data.msg)
+					}
+				})
+			}
+		})
+
+	}
+
 	const DetailChange = (name, e) => {
 		console.log(e)
 		setArticleinfo({
@@ -48,26 +88,56 @@ function AddArticle() {
 
 	const handleChange = (value) => {
 		categorylist.map((item) => {
-			if (item.title == value) {
+			if (item.name == value) {
 				setArticleinfo({
 					...articleinfo,
-					categoryid: item.id,
+					categoryid: item._id,
 					categoryname: value
 				})
 			}
 		})
 	}
+
+	const normFile = (e) => {
+		if (Array.isArray(e)) {
+			return e;
+		}
+		return e && e.fileList;
+	};
+
 	return (
 		<div style={{ marginLeft: '.2rem', marginRight: '.2rem', marginTop: '.15rem' }}>
 			<div>
 				新增文章
 			</div>
 			<Form
+				form={form}
 				className='AddArticle'
 				name="addarticle"
 				initialValues={{ remember: true }}
-
 			>
+				{/* <Form.Item
+					name="articlepic"
+					label="缩略图"
+					valuePropName="fileList"
+					getValueFromEvent={normFile}
+				>
+					<Upload name="articlepic"
+						accept="image/jpeg,image/png"
+						fileList={fileList}
+						maxCount={1}
+						beforeUpload={() => false}
+						onChange={({ file, fileList }) => {
+							setFileList(fileList)
+						}}
+						onPreview={(e) => {
+							console.log(e.thumbUrl)
+						}}
+						listType="picture-card"
+					>
+						<div style={{ width: '50px', height: '50px', borderRadius: '50px', border: '1px solid #ddd', lineHeight: '50px' }}>+</div>
+					</Upload>
+				</Form.Item> */}
 				<Form.Item
 					label="标题"
 					name="title"
@@ -99,7 +169,7 @@ function AddArticle() {
 					<Select allowClear onChange={handleChange}>
 						{
 							categorylist.map((item, key) =>
-								<Option key={item.id} value={item.title}>{item.title}</Option>
+								<Option key={item.id} value={item.name}>{item.name}</Option>
 							)
 						}
 					</Select>
@@ -110,6 +180,8 @@ function AddArticle() {
         			</Button>
 				</Form.Item>
 			</Form>
+
+
 		</div>
 	);
 }

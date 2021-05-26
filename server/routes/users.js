@@ -41,7 +41,7 @@ router.post('/login', (req, res, next) => {
 		} else {
 			res.json(Result({
 				msg: "用户不存在",
-				success: true,
+				success: false,
 				result: null
 			}));
 			return

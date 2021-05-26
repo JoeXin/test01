@@ -1,4 +1,4 @@
-const { Articles } = require('../schema/index')
+const { Articles,Category } = require('../schema/index')
 
 const Result = require('../result/index')
 
@@ -38,6 +38,7 @@ router.post('/addArticles', (req, res, next) => {
 			}));
 			return
 		}
+		console.log(error)
 		res.json(Result({
 			msg: "新增失败",
 			success: false,
@@ -137,6 +138,49 @@ router.post('/getArticlesByPages', (req, res, next) => {
 
 })
 
+router.post('/uploadArticlePic',(req,res,next)=>{
+	console.log(req.body)
+})
 
 
+router.post('/getCategory',(req,res,next)=>{
+	Category.find({}, function (error, doc) {
+		if (!error) {
+			res.json(Result({
+				msg: "获取成功",
+				success: true,
+				result: doc
+			}));
+			return
+		}
+		res.json(Result({
+			msg: "获取失败",
+			success: false,
+			result: null
+		}))
+		next();
+	});
+})
+
+
+router.post('/saveCategory',(req,res,next)=>{
+	var item = req.body;
+	const category = new Category(item);
+	category.save(function (error, doc) {
+		if (!error) {
+			res.json(Result({
+				msg: "新增成功",
+				success: true,
+				result: doc
+			}));
+			return
+		}
+		res.json(Result({
+			msg: "新增失败",
+			success: false,
+			result: null
+		}))
+		next();
+	});
+})
 module.exports = router
