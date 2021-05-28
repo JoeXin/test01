@@ -7,7 +7,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // 让 mongoose 使用全局 Promise 库
 mongoose.Promise = global.Promise;
-
+mongoose.set('useFindAndModify', false)
 // 取得默认连接
 const db = mongoose.connection;
 
@@ -16,7 +16,7 @@ db.on("error", function (error) {
 });
 
 db.on("open", function () {
-	// console.log("------数据库连接成功！------");
+	 console.log("------数据库连接成功！------");
 });
 
 module.exports = db;

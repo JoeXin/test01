@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Form, Input, Button, Select, Upload ,message} from 'antd';
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
+ import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 
 import http from '@/common/utils/http'
 
@@ -19,20 +19,20 @@ function AddArticle(props) {
 	const [categorylist, setCategorylist] = useState([])
 
 
-	setTimeout(() => {
-		if (props.location.state) {
-			setArticleinfo(props.location.state)
-			form.setFieldsValue({
-				title: articleinfo.title,
-				description: articleinfo.description,
-				content: articleinfo.content,
-				categoryid: articleinfo.categoryid,
-				categoryname: articleinfo.categoryname,
-				articlepic: '',
-				category: articleinfo.categoryname
-			})
-		}
-	})
+	// setTimeout(() => {
+	// 	if (props.location.state) {
+	// 		setArticleinfo(props.location.state)
+	// 		form.setFieldsValue({
+	// 			title: articleinfo.title,
+	// 			description: articleinfo.description,
+	// 			content: articleinfo.content,
+	// 			categoryid: articleinfo.categoryid,
+	// 			categoryname: articleinfo.categoryname,
+	// 			articlepic: '',
+	// 			category: articleinfo.categoryname
+	// 		})
+	// 	}
+	// })
 
 
 
@@ -60,13 +60,16 @@ function AddArticle(props) {
 				}
 			}
 			if (!flag) {
-				http.PostUrl('posts/addArticles', {
+				let user=localStorage.getItem('user');
+				let userinfo=JSON.parse(user);
+ 				http.PostUrl('posts/addArticles', {
 					title: articleinfo.title,
 					description: articleinfo.description,
 					content: articleinfo.content,
 					categoryid: articleinfo.categoryid,
 					categoryname: articleinfo.categoryname,
-					// articlepic:fileList?.fileList[0].thumbUrl
+					author_id:userinfo._id,
+					  articlepic: fileList[0].thumbUrl
 				}).then((data) => {
 					if (data.success) {
 					} else {
@@ -116,7 +119,7 @@ function AddArticle(props) {
 				name="addarticle"
 				initialValues={{ remember: true }}
 			>
-				{/* <Form.Item
+				<Form.Item
 					name="articlepic"
 					label="缩略图"
 					valuePropName="fileList"
@@ -137,7 +140,7 @@ function AddArticle(props) {
 					>
 						<div style={{ width: '50px', height: '50px', borderRadius: '50px', border: '1px solid #ddd', lineHeight: '50px' }}>+</div>
 					</Upload>
-				</Form.Item> */}
+				</Form.Item>
 				<Form.Item
 					label="标题"
 					name="title"

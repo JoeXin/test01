@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 const bcryptjs = require('bcryptjs');
 
-// Schema定义数据的数据结构
 var ProductSchema = mongoose.Schema({
 	id: {
 		type: String,
@@ -23,10 +22,10 @@ var UserSchema = mongoose.Schema({
 	},
 	userName: String,
 	passWord: {
-		type:String,
-		set(val){
-            return bcryptjs.hashSync(val)
-        }
+		type: String,
+		set(val) {
+			return bcryptjs.hashSync(val, 10)
+		}
 	},
 	age: Number,
 	active: {
@@ -61,9 +60,12 @@ var Category = mongoose.model('Category', CategoriesSchema, 'category');
 
 
 var ArticlesSchema = mongoose.Schema({
-
+	author_id: {
+		type: mongoose.Types.ObjectId,
+		ref: "user"
+	},
 	title: {
-		type:String
+		type: String
 	},
 	description: {
 		type: String,
@@ -73,21 +75,22 @@ var ArticlesSchema = mongoose.Schema({
 		type: String,
 		default: ''
 	},
-	
+
 	addTime: { type: Date, default: Date.now },
 
 	views: {
 		type: Number,
 		default: 0
 	},
-	articlepic:{
-		type:String
+	articlepic: {
+		type: String
 	},
 	categoryname: {
 		type: String
 	},
 	categoryid: {
-		type: String 
+		type: mongoose.Types.ObjectId,
+		ref: "Category"
 	},
 	/**
 	 * 状态
@@ -102,13 +105,42 @@ var ArticlesSchema = mongoose.Schema({
 		type: Number,
 		default: 1
 	}
+}, {
+	// collection: 'example', // 这里是为了避免新建的表会带上 s 后缀
+	versionKey: false // 不需要 __v 字段，默认是加上的
 })
 
 var Articles = mongoose.model('Articles', ArticlesSchema, 'articles');
 
+/**
+ * 用户收货地址
+ */
+var UserAddresssSchema = mongoose.Schema({
+	user_id: {
+		type: mongoose.Types.ObjectId,
+		ref: "user"
+	},
+	concat: String,
+	mobile: String,
+	provinceid: String,
+	provincename: String,
+	cityid: String,
+	cityname: String,
+	address: String,
+	postcode: String,
+	active:{
+		type: Number,
+		default:1
+	}
+});
+
+var UserAddresss = mongoose.model('UserAddresss', UserAddresssSchema, 'useraddress');
+
+
 module.exports = {
 	Product,
 	User,
+	UserAddresss,
 	Category,
 	Articles,
 	// Story,

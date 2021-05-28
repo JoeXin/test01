@@ -6,21 +6,20 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import './index.less';
 import http from '@/common/utils/http'
 
-function Login() {
+function Register() {
 	let history = useHistory();
 
 	const [loginstate, setLoginstate] = useState({})
 
-	const loginBind = (e) => {
+	const registerBind = (e) => {
 		e.preventDefault()
-		http.PostUrl('users/login', {
+		http.PostUrl('users/register', {
 			userName: loginstate.userName,
 			passWord: loginstate.passWord
 		}).then((data) => {
 			if (data.success) {
-				let result = data.result;
-				localStorage.setItem('user', JSON.stringify(result.user))
-				history.push('/article')
+				let result=data.result;
+		 
 			} else {
 				console.log(data.msg)
 			}
@@ -40,25 +39,22 @@ function Login() {
 			passWord: e.target.value
 		})
 	}
-	const registerBind = () => {
-		history.push({ pathname: '/register' })
-	}
 
-
+ 
 
 	return (
 		<div className="App">
 			<div className="Content">
-
+			 
 				<Form
-					className='LoginForm'
+ 					className='LoginForm'
 					name="loginContent"
 					initialValues={{ remember: true }}
 				>
 					<Form.Item
 						label="账号"
 						name="userName"
-						rules={[{ message: '请输入账号!' }]}
+						rules={[{   message: '请输入账号!' }]}
 					>
 						<Input onChange={userChange} />
 					</Form.Item>
@@ -66,17 +62,14 @@ function Login() {
 					<Form.Item
 						label="密码"
 						name="passWord"
-						rules={[{ message: '请输入密码!' }]}
+						rules={[{   message: '请输入密码!' }]}
 					>
 						<Input.Password onChange={passwordChange} />
 					</Form.Item>
 
-
+				 
 					<Form.Item  >
-						<Button type="primary" onClick={loginBind} htmlType="submit">
-							登录
-        				</Button>
-						<Button type="primary" onClick={registerBind} style={{marginLeft:'20px'}}>
+						<Button type="primary" onClick={registerBind}>
 							注册
         				</Button>
 					</Form.Item>
@@ -86,4 +79,4 @@ function Login() {
 	);
 }
 
-export default Login;
+export default Register;

@@ -25,6 +25,7 @@ app.all("*", function (req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
+app.use(express.static('./server'))
 
 //用户
 app.use('/users', usersRouter);
@@ -34,7 +35,7 @@ app.use('/posts', postsRouter);
 app.use(function (req, res, next) {
 	var err = new Error('Not Found');
 	err.status = 404;
-	next(err);
+	res.send('404');
 });
 
 // error handler
@@ -42,7 +43,7 @@ app.use(function (err, req, res, next) {
 	res.locals.message = err.message;
 	res.locals.error = req.app.get('env') === 'development' ? err : {};
 	res.status(err.status || 500);
-	res.render('error');
+	res.send('error');
 });
 
 
