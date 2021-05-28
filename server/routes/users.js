@@ -1,4 +1,4 @@
-const { User } = require('../schema/index')
+const { User, UserAddresss } = require('../schema/index')
 
 const bcryptjs = require('bcryptjs');
 
@@ -47,9 +47,8 @@ router.post('/login', (req, res, next) => {
 					)
 					if (isPasswordValid) {
 						UserLogin(req).then(function (data) {
-							let fileds='userName'
-							User.find({ userName: req.body.userName },fileds , (e, r) => {
-								console.log(r)
+							let fileds = 'userName'
+							User.find({ userName: req.body.userName }, fileds, (e, r) => {
 								let data = r.reduce((accu, cur, index) => (accu['user'] = cur, accu), {});
 								res.json(Result({
 									msg: "获取成功",
@@ -134,6 +133,65 @@ router.post('/register', (req, res, next) => {
 });
 
 
+router.post('/insertAddress', (req, res, next) => {
+	let item = req.body
+	const useraddresss = new UserAddresss(item);
+	useraddresss.save(function (error, doc) {
+		if (!error) {
+			res.json(Result({
+				msg: "新增成功",
+				success: true,
+				result: doc
+			}));
+			return
+		}
+		res.json(Result({
+			msg: "新增失败",
+			success: false,
+			result: null
+		}))
+		next();
+	});
+})
 
+
+router.post('/updateAddress', (req, res, next) => {
+	let item = req.body
+	UserAddresss.update({ _id: item._id }, item, function (error, doc) {
+		if (!error) {
+			res.json(Result({
+				msg: "修改成功",
+				success: true,
+				result: doc
+			}));
+			return
+		}
+		res.json(Result({
+			msg: "修改失败",
+			success: false,
+			result: null
+		}))
+		next();
+	});
+})
+
+router.post('/getAddress', (req, res, next) => {
+	UserAddresss.find({ active: 1 }, function (error, doc) {
+		if (!error) {
+			res.json(Result({
+				msg: "获取成功",
+				success: true,
+				result: doc
+			}));
+			return
+		}
+		res.json(Result({
+			msg: "获取失败",
+			success: false,
+			result: null
+		}))
+		next();
+	});
+})
 
 module.exports = router

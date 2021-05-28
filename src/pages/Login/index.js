@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 
 import './index.less';
 import http from '@/common/utils/http'
@@ -19,6 +19,7 @@ function Login() {
 		}).then((data) => {
 			if (data.success) {
 				let result = data.result;
+				message.success(data.msg)
 				localStorage.setItem('user', JSON.stringify(result.user))
 				history.push('/article')
 			} else {

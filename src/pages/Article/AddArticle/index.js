@@ -72,6 +72,7 @@ function AddArticle(props) {
 					  articlepic: fileList[0].thumbUrl
 				}).then((data) => {
 					if (data.success) {
+						message.success(data.msg)
 					} else {
 						console.log(data.msg)
 					}
