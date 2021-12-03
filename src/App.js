@@ -66,7 +66,8 @@ class App extends React.Component {
                     <div className="location">
                         <Dropdown overlay={this.menu}>
                             <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                                {this.state.city} <DownOutlined />
+                                {this.state.city} 
+
                             </a>
                         </Dropdown>
                     </div>
