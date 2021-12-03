@@ -17,7 +17,7 @@ jobs:
     - name: Install and Build
       run: |
         npm install
-        npm run-script build
+        CI=false&&npm run-script build
      
     # react项目的FOLDER为build 
     - name: Deploy
