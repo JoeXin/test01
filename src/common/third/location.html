@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript"
+        src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=LdmX4kqW4EBhzLiGmaxxsxTDNNv5nA7e"></script>
+    <style type="text/css">
+        html {
+            height: 100%
+        }
+
+        body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+
+        #container {
+            height: 100%
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script>
+
+        // var map = new BMapGL.Map("container");          // 创建地图实例 
+        // var point = new BMapGL.Point(116.404, 39.915);  // 创建点坐标 
+        // map.centerAndZoom(point, 15);   
+
+
+        var map = new BMapGL.Map("container");
+        map.centerAndZoom(new BMapGL.Point(116.404, 39.915), 12);
+        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+        var geolocation = new BMapGL.Geolocation();
+
+        var startline, endline,start;
+
+
+        geolocation.getCurrentPosition(function (r) {
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                var mk = new BMapGL.Marker(r.point);
+                map.addOverlay(mk);
+                map.panTo(r.point);
+                console.log(r.point.lng + ',' + r.point.lat)
+                // startline = Number(r.point.lng), ;
+                 start = new BMapGL.Point(Number(r.point.lng),Number(r.point.lat));
+
+            }
+            else {
+                console('failed' + this.getStatus());
+            }
+        });
+
+        var myGeo = new BMapGL.Geocoder();
+
+        var output = "从xx到xxx需要";
+        var searchComplete = function (results) {
+            if (transit.getStatus() != BMAP_STATUS_SUCCESS) {
+                return;
+            }
+            var plan = results.getPlan(0);
+            output += plan.getDuration(true) + "\n";                //获取时间
+            output += "总路程为：";
+            output += plan.getDistance(true) + "\n";             //获取距离
+        }
+        var transit = new BMapGL.DrivingRoute(map, {
+            renderOptions: { map: map },
+            onSearchComplete: searchComplete,
+            onPolylinesSet: function () {
+                setTimeout(function () {
+                    console.log(output)
+                }, 1000);
+            }
+        });
+        
+
+        map.addEventListener('click', handleClick);
+        function handleClick(e) {
+            // var endline = e.latlng.lng + ',' + e.latlng.lat
+            var d= e.latlng.lng + ',' + e.latlng.lat
+            var pt = e.latlng;
+
+            myGeo.getLocation(pt, function (rs) {
+                var address = rs.address;
+                console.log(address)
+                var addComp = rs.addressComponents;
+                // endline = rs.point.lng + ',' + rs.point.lat;
+                         var cc = rs.point.lng + ',' + rs.point.lat;
+                console.log(d,cc)
+                var end = new BMapGL.Point(Number(rs.point.lng),Number(rs.point.lat));
+                transit.search(start, end);
+            })
+
+           
+        }
+        // map.removeEventListener('click', handleClick);
+
+
+
+
+    </script>
+    <!-- <script>
+        function initialize() {
+            var mp = new BMapGL.Map('map');
+            mp.centerAndZoom(new BMapGL.Point(121.491, 31.233), 11);
+        }
+
+        function loadScript() {
+            var script = document.createElement("script");
+            script.src = "https://api.map.baidu.com/api?v=1.0&type=webgl&ak=LdmX4kqW4EBhzLiGmaxxsxTDNNv5nA7e&callback=initialize";
+            document.body.appendChild(script);
+        }
+
+        window.onload = loadScript; 
+    </script> -->
+    <script>
+        let d = [
+            {
+                areacode: null,
+                areaname: "北京市",
+                id: 110000,
+                lat: "39.904987",
+                level: 1,
+                lng: "116.405289",
+                num: null,
+                parentid: 0,
+                pinyin: null,
+                position: "tr_0",
+                shortname: "北京",
+                sort: 1,
+                zipcode: null
+            },
+            {
+                areacode: null,
+                areaname: "23市",
+                id: 110020,
+                lat: "39.904987",
+                level: 1,
+                lng: "116.405289",
+                num: null,
+                parentid: 0,
+                pinyin: null,
+                position: "tr_0",
+                shortname: "北京",
+                sort: 1,
+                zipcode: null
+            }
+        ]
+
+
+        function fieldArr(arr, key, value) {
+            let obj = {}, newarr = [];
+            arr.map(item => obj[item[key]] = item[value])
+            Object.keys(obj).forEach(v => {
+                let o = {};
+                o[v] = obj[v];
+                newarr.push(o)
+            })
+            return newarr
+        }
+
+        // const sumRight = values.reduce((prev, cur, index, array) => {
+        //     return prev + cur;
+        // });
+
+        // console.log(fieldArr(d, 'id', 'areaname'))
+    </script>
+</body>
+
+</html>
