@@ -19,7 +19,7 @@ jobs:
         npm install
         npm run-script build
      
-    # react项目的FOLDER为build 
+    # react项目的FOLDER为build  
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
